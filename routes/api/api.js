@@ -1,11 +1,17 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const mymodel=require('../../src/models/addRestaurants');
+const restaurants=require('../../src/models/addRestaurants');
+const places=require('../../src/models/addPlaces');
 
 
 router.get('/restaurants',(req,res)=>{
-    mymodel.find({},(error,data)=>{
+    restaurants.find({},(error,data)=>{
+        res.json(data)
+    })
+})
+router.get('/palces',(req,res)=>{
+    places.find({},(error,data)=>{
         res.json(data)
     })
 })
