@@ -10,7 +10,7 @@ router.get('/restaurants',(req,res)=>{
         res.json(data)
     })
 })
-router.get('/palces',(req,res)=>{
+router.get('/places',(req,res)=>{
     places.find({},(error,data)=>{
         res.json(data)
     })
