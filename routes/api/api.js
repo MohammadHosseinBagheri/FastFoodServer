@@ -4,13 +4,15 @@ const mongoose = require("mongoose");
 const restaurants = require("../../src/models/addRestaurants");
 const places = require("../../src/models/addPlaces");
 const categories = require("../../src/models/addCategories");
-const loginAuth=require('../../src/models/loginAuth');
+const loginAuth = require("../../src/models/loginAuth");
 
-const bodyParser=require('body-parser');
+const bodyParser = require("body-parser");
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({
-    extended:true
-}))
+router.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 
 router.get("/restaurants", (req, res) => {
   restaurants.find({}, (error, data) => {
@@ -27,18 +29,20 @@ router.get("/categories", (req, res) => {
     res.json(data);
   });
 });
-router.post('/login/users',(req,res)=>{
-  const phone=req.body.phone
-  loginAuth.find({"phone":phone},(error,data)=>{
-    if(data){
+router.post("/login/users", (req, res) => {
+  const phone1 = req.body.phone;
+  loginAuth.findOne({ phone: phone1 }, (error, data) => {
+    if (data) {
       res.json({
-        "status":200
+        status: 200,
+        phone: data
       });
-    }else{
+      return;
+    } else {
       res.json({
-        "status":404
-      })
+        status: 404
+      });
     }
-  })
-})
+  });
+});
 module.exports = router;
