@@ -5,7 +5,7 @@ const restaurants = require("../../src/models/addRestaurants");
 const places = require("../../src/models/addPlaces");
 const categories = require("../../src/models/addCategories");
 const loginAuth = require("../../src/models/loginAuth");
-
+const menus=require('../../src/models/addMenu');
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 router.use(
@@ -26,6 +26,11 @@ router.get("/places", (req, res) => {
 });
 router.get("/categories", (req, res) => {
   categories.find({}, (error, data) => {
+    res.json(data);
+  });
+});
+router.get("/menu", (req, res) => {
+  menus.find({}, (error, data) => {
     res.json(data);
   });
 });
