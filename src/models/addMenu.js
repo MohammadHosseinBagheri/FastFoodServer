@@ -10,4 +10,4 @@ const menuSchema = mongoose.Schema({
     type: Number
   }
 });
-module.exports = mongoose.model("menus", menuSchema);
+module.exports = mongoose.model("menuss", menuSchema);

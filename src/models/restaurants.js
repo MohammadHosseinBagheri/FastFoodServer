@@ -17,6 +17,18 @@ const restaurantsSchema = mongoose.Schema({
   },
   managePhone: {
     type: String
+  },
+  id: {
+    type: Number,
+    unique: true
+  },
+  rate: {
+    type: Number,
+    default: 0
+  },
+  userManagement: {
+    type: String,
+    default: null
   }
 });
 module.exports = mongoose.model("restaurants", restaurantsSchema);
