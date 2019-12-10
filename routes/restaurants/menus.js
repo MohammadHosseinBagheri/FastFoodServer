@@ -36,7 +36,12 @@ router.post("/addfood", (req, res) => {
   const data = req.body;
   console.log(data.restaurantId.id);
   const foodName = data.name;
-  const tag = data.tag;
+  if(data.tag==""){
+    var tag = 'برگر';
+  }else{
+    var tag = data.tag;
+  }
+  
   const price = data.price;
   const description = data.description;
   const restaurantId = data.restaurantId.id;
@@ -98,10 +103,10 @@ router.post("/categories", (req, res) => {
         return;
       } else {
         res.json({
-          data: data
+          data: data,
+          status:200
         });
       }
-      console.log(data);
     });
     return;
   }
