@@ -71,7 +71,7 @@ router.post("/categories", (req, res) => {
           status:400
         });
         return;
-      } else if (!data) {
+      } else if (data.length==0) {
         res.json({
           message: "no item",
           status: 404
@@ -95,7 +95,7 @@ router.post("/categories", (req, res) => {
           status:400
         });
         return;
-      } else if (!data) {
+      } else if (data.length==0) {
         res.json({
           message: "no item",
           status: 404
@@ -119,7 +119,7 @@ router.post("/categories", (req, res) => {
           status:400
         });
         return;
-      } else if (!data) {
+      } else if (data.length==0) {
         res.json({
           message: "no item",
           status: 404
@@ -143,7 +143,7 @@ router.post("/categories", (req, res) => {
           status:400
         });
         return;
-      } else if (!data) {
+      } else if (data.length==0) {
         res.json({
           message: "no item",
           status: 404
@@ -167,7 +167,7 @@ router.post("/categories", (req, res) => {
           status:400
         });
         return;
-      } else if (!data) {
+      } else if (data.length==0) {
         res.json({
           message: "no item",
           status: 404
@@ -191,7 +191,7 @@ router.post("/categories", (req, res) => {
           status:400
         });
         return;
-      } else if (!data) {
+      } else if (data.length==0) {
         res.json({
           message: "no item",
           status: 404
