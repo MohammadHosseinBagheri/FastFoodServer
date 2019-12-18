@@ -36,12 +36,12 @@ router.post("/addfood", (req, res) => {
   const data = req.body;
   console.log(data.restaurantId.id);
   const foodName = data.name;
-  if(data.tag==""){
-    var tag = 'برگر';
-  }else{
+  if (data.tag == "") {
+    var tag = "برگر";
+  } else {
     var tag = data.tag;
   }
-  
+
   const price = data.price;
   const description = data.description;
   const restaurantId = data.restaurantId.id;
@@ -68,10 +68,10 @@ router.post("/categories", (req, res) => {
       if (error) {
         res.json({
           error: error,
-          status:400
+          status: 400
         });
         return;
-      } else if (data.length==0) {
+      } else if (data.length == 0) {
         res.json({
           message: "no item",
           status: 404
@@ -80,7 +80,7 @@ router.post("/categories", (req, res) => {
       } else {
         res.json({
           data: data,
-          status:200
+          status: 200
         });
       }
     });
@@ -92,10 +92,10 @@ router.post("/categories", (req, res) => {
       if (error) {
         res.json({
           error: error,
-          status:400
+          status: 400
         });
         return;
-      } else if (data.length==0) {
+      } else if (data.length == 0) {
         res.json({
           message: "no item",
           status: 404
@@ -104,7 +104,7 @@ router.post("/categories", (req, res) => {
       } else {
         res.json({
           data: data,
-          status:200
+          status: 200
         });
       }
     });
@@ -116,10 +116,10 @@ router.post("/categories", (req, res) => {
       if (error) {
         res.json({
           error: error,
-          status:400
+          status: 400
         });
         return;
-      } else if (data.length==0) {
+      } else if (data.length == 0) {
         res.json({
           message: "no item",
           status: 404
@@ -128,7 +128,7 @@ router.post("/categories", (req, res) => {
       } else {
         res.json({
           data: data,
-          status:200
+          status: 200
         });
       }
     });
@@ -140,10 +140,10 @@ router.post("/categories", (req, res) => {
       if (error) {
         res.json({
           error: error,
-          status:400
+          status: 400
         });
         return;
-      } else if (data.length==0) {
+      } else if (data.length == 0) {
         res.json({
           message: "no item",
           status: 404
@@ -152,7 +152,7 @@ router.post("/categories", (req, res) => {
       } else {
         res.json({
           data: data,
-          status:200
+          status: 200
         });
       }
     });
@@ -164,10 +164,10 @@ router.post("/categories", (req, res) => {
       if (error) {
         res.json({
           error: error,
-          status:400
+          status: 400
         });
         return;
-      } else if (data.length==0) {
+      } else if (data.length == 0) {
         res.json({
           message: "no item",
           status: 404
@@ -176,7 +176,7 @@ router.post("/categories", (req, res) => {
       } else {
         res.json({
           data: data,
-          status:200
+          status: 200
         });
       }
     });
@@ -188,10 +188,10 @@ router.post("/categories", (req, res) => {
       if (error) {
         res.json({
           error: error,
-          status:400
+          status: 400
         });
         return;
-      } else if (data.length==0) {
+      } else if (data.length == 0) {
         res.json({
           message: "no item",
           status: 404
@@ -200,11 +200,30 @@ router.post("/categories", (req, res) => {
       } else {
         res.json({
           data: data,
-          status:200
+          status: 200
         });
       }
     });
     return;
   }
+});
+router.post("/remove", (req, res) => {
+  const _id = req.body.data._id;
+  //console.log(_id);
+  menuModel.findOneAndDelete({ _id: _id }, (error, data) => {
+    if (error) {
+      res.json({
+        status: 400,
+        message: error
+      });
+      return;
+    } else {
+      console.log(data);
+      res.json({
+        data: data,
+        status: 200
+      });
+    }
+  });
 });
 module.exports = router;
