@@ -19,7 +19,7 @@ const restaurantsSchema = mongoose.Schema({
     type: String
   },
   id: {
-    type: Number,
+    type: String,
     unique: true
   },
   rate: {

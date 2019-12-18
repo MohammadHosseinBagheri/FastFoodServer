@@ -13,14 +13,22 @@ router.post("/", (req, res) => {
   //const date = new Date().getMilliseconds() + new Date().getDate();
   // console.log(date);
   // const sixDigit = phone.slice(0, 6);
-  const id = `${phone}${managePhone}`;
-  console.log(id);
+  const day = new Date().getDay();
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth();
+  const hour = new Date().getHours();
+  const minute = new Date().getMinutes();
+  const miliseconds = new Date().getMilliseconds();
+  // console.log(day, year, month, hour, minute, miliseconds);
+  const id = `${year}${day}${month}${hour}${minute}${miliseconds}`;
   restauranModel.findOne({ id: id }, (error, findData) => {
-    if (error)
+    if (error) {
       res.json({
         status: 400,
         message: error
       });
+      return;
+    }
     if (findData) {
       res.json({
         data: findData,
@@ -51,7 +59,7 @@ router.post("/", (req, res) => {
 router.post("/location", (req, res) => {
   // console.log(req.body);
   const data = req.body;
-  const id = data.id;
+  const myId = data.id;
   const latitude = data.location.latitude;
   const longitude = data.location.longitude;
   const location = data.location;
@@ -63,28 +71,31 @@ router.post("/location", (req, res) => {
     });
     return;
   }
-  var query = { id: id };
-  console.log(location, latitude, longitude);
   restauranModel.findOneAndUpdate(
-    query,
+    { id: myId },
     { latitude: latitude, longitude: longitude },
-    { new: true }
-  );
-  restauranModel.findOne({ id: id }, (error, myData) => {
-    if (error) {
-      res.json({
-        message: error,
-        status: 400
-      });
-      return;
-    } else {
-      console.log(myData);
-      res.json({
-        status: 200,
-        data: myData
-      });
+    { upsert: true, new: true },
+    (error, myData) => {
+      if (error) {
+        res.json({
+          message: error,
+          status: 400
+        });
+        return;
+      } else {
+        myData.save();
+
+        // await myData.update({ latitude: latitude, longitude: longitude });
+        // await myData.save();
+        console.log(myData);
+
+        res.json({
+          status: 200,
+          data: myData
+        });
+      }
     }
-  });
+  );
 });
 
 module.exports = router;
