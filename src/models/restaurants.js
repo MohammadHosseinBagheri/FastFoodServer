@@ -28,7 +28,14 @@ const restaurantsSchema = mongoose.Schema({
   },
   userManagement: {
     type: String,
-    default: null
+  },
+  latitude:{
+    type:Number,
+    default:0,
+  },
+  longitude:{
+    type:Number,
+    default:0,
   }
 });
 module.exports = mongoose.model("restaurants", restaurantsSchema);
