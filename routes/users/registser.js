@@ -7,6 +7,7 @@ router.post("/", (req, res) => {
   const name = reqData.name;
   const lastName = reqData.lastName;
   const password = reqData.password;
+  const tag=reqData.tag
   //console.log(phone,name,lastName,password)
   userModel.findOne({ phone: phone }, (error, data) => {
     if (error) {
@@ -28,7 +29,8 @@ router.post("/", (req, res) => {
         name: name,
         lastName: lastName,
         password: password,
-        phone: phone
+        phone: phone,
+        tag:tag
       });
       newUser.save();
       res.json({

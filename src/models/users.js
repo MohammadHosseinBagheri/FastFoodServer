@@ -12,6 +12,10 @@ const userSchema = mongoose.Schema({
   phone: {
     type: String,
     unique:true
+  },
+  tag:{
+    type:String,
+    default:'user'
   }
 });
 module.exports = mongoose.model("users", userSchema);
