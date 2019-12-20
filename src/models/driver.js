@@ -22,8 +22,5 @@ const driverSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
-  restaurantId: {
-    type: String
-  }
 });
 module.exports = mongoose.model("driver", driverSchema);
