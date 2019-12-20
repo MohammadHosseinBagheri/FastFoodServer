@@ -67,4 +67,27 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/remove", (req, res) => {
+  const data = req.body;
+  const restaurantId = data.data.restaurantId;
+  const nationalCode = data.data.nationalCode;
+  //console.log(restaurantId, driverId);
+  driverModel.findOneAndDelete(
+    { restaurantId: restaurantId, nationalCode: nationalCode },
+    (error, data) => {
+      if (error) {
+        res.json({
+          message: error,
+          status: 400
+        });
+      } else {
+        res.json({
+          status: 200,
+          data: data
+        });
+      }
+    }
+  );
+});
+
 module.exports = router;
