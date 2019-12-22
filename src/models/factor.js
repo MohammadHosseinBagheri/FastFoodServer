@@ -7,13 +7,25 @@ const factorSchema = mongoose.Schema({
     type: Date
   },
   messegae: {
-    type: String
+    type: String,
+    default: "راننده خوب بود"
   },
   address: {
-    type: String
+    type: String,
+    default: "دانشگاه شهید باهنر کرمان"
   },
   personId: {
     type: String
+  },
+  personName: {
+    type: String
+  },
+  status: {
+    type: Number,
+    default: -1
+  },
+  maghsad:{
+    type:Object
   }
 });
 module.exports = mongoose.model("factor", factorSchema);
