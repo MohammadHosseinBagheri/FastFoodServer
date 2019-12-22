@@ -11,8 +11,9 @@ router.post("/register", (req, res) => {
   const phone = data.phone;
   // const restaurantId = data.restaurantId;
   driverModel.findOne(
-    { nationalCode: nationalCode
-      //restaurantId: restaurantId 
+    {
+      nationalCode: nationalCode
+      //restaurantId: restaurantId
     },
     (error, myData) => {
       if (error) {
@@ -34,8 +35,8 @@ router.post("/register", (req, res) => {
           lastName: lastName,
           nationalCode: nationalCode,
           pelak: pelak,
-          phone: phone,
-         // restaurantId: restaurantId
+          phone: phone
+          // restaurantId: restaurantId
         });
         newDriver.save();
         res.json({
@@ -47,27 +48,48 @@ router.post("/register", (req, res) => {
   );
 });
 
-// router.post("/", (req, res) => {
-//   const data = req.body;
- // const restaurantId = data.restaurantId;
-//  console.log(restaurantId);
-//   driverModel.find({ restaurantId: restaurantId }, (error, myData) => {
-//     if (error) {
-//       res.json({
-//         message: error,
-//         status: 400
-//       });
-//       return;
-//     }
-//     if (myData) {
-//       res.json({
-//         status: 200,
-//         data: myData
-//       });
-//       return;
-//     }
-//   });
-// });
+router.post("/", (req, res) => {
+  const data = req.body;
+  //  const restaurantId = data.restaurantId;
+  const nationalCode = data.nationalCode;
+  console.log(data);
+  // driverModel.find({ restaurantId: restaurantId }, (error, myData) => {
+  //   if (error) {
+  //     res.json({
+  //       message: error,
+  //       status: 400
+  //     });
+  //     return;
+  //   }
+  //   if (myData) {
+  //     res.json({
+  //       status: 200,
+  //       data: myData
+  //     });
+  //     return;
+  //   }
+  // });
+  driverModel.find({ nationalCode: nationalCode }, (error, myData) => {
+    if (error) {
+      res.json({
+        message: error,
+        status: 400
+      });
+      return;
+    }
+    if (myData.length==0) {
+      res.json({
+        status: 404,
+      });
+      return;
+    }else{
+      res.json({
+        data:myData,
+        status:200
+      })
+    }
+  });
+});
 
 // router.post("/remove", (req, res) => {
 //   const data = req.body;
@@ -103,8 +125,9 @@ router.post("/update", (req, res) => {
   const id = data._id;
   console.log(id);
   driverModel.findOneAndUpdate(
-    { _id: id, 
-    //  restaurantId: restaurantId 
+    {
+      _id: id
+      //  restaurantId: restaurantId
     },
     {
       name: name,
